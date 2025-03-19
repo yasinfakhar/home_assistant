@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Server component - Flask API with Whisper and GPT-4o mini
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: home-assistant-server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+      - server_data:/app/data
+    env_file:
+      - ./server/.env
+    environment:
+      - RUNNING_IN_DOCKER=true
+    restart: unless-stopped
+    networks:
+      - home-assistant-network
+
+  # Client component - Web interface
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: home-assistant-client
+    ports:
+      - "8000:80"
+    volumes:
+      - ./client:/usr/share/nginx/html
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - home-assistant-network
+
+networks:
+  home-assistant-network:
+    driver: bridge
+
+volumes:
+  server_data:

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smart Home Assistant</h1>
+            <p class="subtitle">Control your lights with voice or touch</p>
+        </header>
+
+        <div class="lights-container">
+            <div class="light-card" id="light-1">
+                <div class="light-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="light-info">
+                    <h2>Light 1</h2>
+                    <p class="status">Status: <span class="status-text">Off</span></p>
+                </div>
+                <button class="toggle-btn" data-light-id="1">Turn On</button>
+            </div>
+
+            <div class="light-card" id="light-2">
+                <div class="light-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="light-info">
+                    <h2>Light 2</h2>
+                    <p class="status">Status: <span class="status-text">Off</span></p>
+                </div>
+                <button class="toggle-btn" data-light-id="2">Turn On</button>
+            </div>
+        </div>
+
+        <div class="voice-control">
+            <div class="voice-control-inner">
+                <div class="control-options">
+                    <button id="record-btn">
+                        <i class="fas fa-microphone"></i>
+                        <span>Record</span>
+                    </button>
+                    
+                    <div class="file-upload-container">
+                        <label for="audio-upload" class="file-upload-btn">
+                            <i class="fas fa-file-audio"></i>
+                            <span>Upload Audio</span>
+                        </label>
+                        <input type="file" id="audio-upload" accept="audio/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="text-input-container">
+                    <input type="text" id="text-command" placeholder="Or type your command here...">
+                    <button id="send-text-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <p id="processing-status">Ready</p>
+            </div>
+        </div>
+
+        <div class="feedback-container">
+            <div class="transcript-container">
+                <h3>You said:</h3>
+                <p id="transcript"></p>
+            </div>
+            <div class="response-container">
+                <h3>Assistant response:</h3>
+                <p id="assistant-response"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Smart Home Assistant &copy; 2025</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
