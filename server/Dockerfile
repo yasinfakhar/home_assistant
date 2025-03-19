@@ -16,17 +16,18 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy entrypoint script first and make it executable
+COPY entrypoint.sh /app/
+RUN chmod +x /app/entrypoint.sh
+
+# Copy the rest of the application code
 COPY . .
 
 # Create a data directory for temporary files
 RUN mkdir -p /app/data
 
-# Make entrypoint script executable
-RUN chmod +x /app/entrypoint.sh
-
 # Expose the port the app runs on
 EXPOSE 5000
 
-# Use entrypoint script
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Use entrypoint script with shell to ensure proper execution
+CMD ["/bin/sh", "/app/entrypoint.sh"]
